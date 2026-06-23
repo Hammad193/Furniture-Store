@@ -3,42 +3,8 @@
 import { Trash2, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "../../context/CartContext"; 
-import { toast } from 'react-hot-toast';
-
-// Professional Custom Toast Function
-const showCustomToast = (title, message, isSuccess = true) => {
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? 'animate-enter' : 'animate-leave'
-      } max-w-sm w-full bg-white shadow-2xl rounded-2xl pointer-events-auto flex ring-1 ring-black ring-opacity-5 overflow-hidden border border-gray-100`}
-    >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <div className={`h-10 w-10 rounded-full flex items-center justify-center text-xl ${isSuccess ? 'bg-green-100' : 'bg-red-100'}`}>
-              {isSuccess ? '✅' : '⚠️'}
-            </div>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-sm font-bold text-gray-900">{title}</p>
-            <p className="mt-1 text-sm text-gray-500">{message}</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex border-l border-gray-100">
-        <button
-          onClick={() => toast.dismiss(t.id)}
-          className="w-full border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-bold text-[#C5A059] hover:bg-gray-50 focus:outline-none"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  ), {
-    duration: 3000,
-  });
-};
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity } = useCart();
@@ -63,69 +29,222 @@ export default function CartPage() {
       </section>
 
       {/* Cart Content */}
-      <section className="py-10 md:py-20 px-4 max-w-7xl mx-auto">
-        {cart.length === 0 ? (
-          <div className="text-center py-20 border-t border-b">
-            <h2 className="text-3xl font-semibold text-gray-900">No Product in Cart</h2>
-            <Link href="/shop" className="text-[#C5A059] font-bold underline mt-4 block">Continue Shopping</Link>
-          </div>
-        ) : (
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Table Area */}
-            <div className="lg:col-span-2">
-              <div className="hidden md:grid grid-cols-4 pb-4 border-b text-gray-900 text-sm font-medium">
-                <span>Product</span>
-                <span>Price</span>
-                <span>Quantity</span>
-                <span>Total</span>
-              </div>
-              
-              <div className="space-y-6 mt-6">
-                {cart.map((item) => (
-                  <div key={item.id} className="grid grid-cols-1 md:grid-cols-4 items-center gap-4 border-b pb-6">
-                    <div className="flex items-center gap-4">
-                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
-                      <h3 className="font-semibold text-gray-900">{item.name}</h3>
-                    </div>
-                    <p className="text-[#C5A059]">{item.price}</p>
-                    <div className="flex items-center border w-24 rounded text-gray-900">
-                      <button onClick={() => { updateQuantity(item.id, Math.max(1, item.quantity - 1)); showCustomToast("Update", "Quantity decreased"); }} className="px-3">-</button>
-                      <span className="px-3 border-x">{item.quantity}</span>
-                      <button onClick={() => { updateQuantity(item.id, item.quantity + 1); showCustomToast("Update", "Quantity increased"); }} className="px-3">+</button>
-                    </div>
-                    <div className="flex justify-between items-center text-gray-900">
-                      <span>{(parsePrice(item.price) * item.quantity).toFixed(2)}</span>
-                      <button onClick={() => { removeFromCart(item.id); showCustomToast("Deleted", "Item removed from cart.", false); }} className="text-gray-900 hover:text-red-500"><Trash2 size={18} /></button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+      <section className="py-12 md:py-20 px-4 max-w-7xl mx-auto">
 
-              {/* Coupon Section */}
-              <div className="mt-8 flex gap-2">
-                <input placeholder="coupon code" className="border p-3 text-gray-900 w-full md:w-64 rounded" />
-                <button className="border px-6 py-3 text-gray-900 hover:bg-gray-900 cursor-pointer hover:text-white">→</button>
-                <Link href="/shop"><button className="border px-6 py-3 ml-auto text-sm text-gray-900 hover:bg-gray-900 cursor-pointer hover:text-white">UPDATE CART</button></Link>
-              </div>
-            </div>
-
-            {/* Cart Total Box */}
-            <div className="bg-gray-50 p-8 rounded-lg border h-fit">
-              <h2 className="text-xl font-bold mb-6 text-gray-900">Cart Total</h2>
-              <div className="space-y-4 text-sm">
-                <div className="flex justify-between py-2 border-b text-gray-900"><span>Subtotal</span><span>BD. {subtotal.toFixed(2)}</span></div>
-                <div className="flex justify-between py-2 border-b text-gray-900"><span>Discount</span><span>No Discount</span></div>
-                <div className="flex justify-between py-2 border-b text-gray-900"><span>Delivery</span><span className="font-bold">Free</span></div>
-                <div className="flex justify-between py-4 text-lg font-bold text-gray-900"><span>Total :</span><span className="text-[#C5A059]">BD. {total.toFixed(2)}</span></div>
-                <Link href="/checkout">
-                  <button className="w-full mt-4 bg-transparent border-2 border-[#C5A059] text-[#C5A059] cursor-pointer py-3 font-bold hover:bg-[#C5A059] hover:text-white transition">PROCEED TO CHECKOUT</button>
-                </Link>
-                <Link href="/shop" className="block text-center text-[#C5A059] font-bold mt-4 bg-transparent border-2 border-[#C5A059] py-3 hover:bg-[#C5A059] hover:text-white">CONTINUE SHOPPING</Link>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
+  {cart.length === 0 ? (
+    <div className="text-center py-24 bg-white rounded-3xl border">
+      <h2 className="text-2xl font-semibold text-gray-900">
+        Your cart is empty
+      </h2>
+      <Link href="/shop" className="text-[#C5A059] mt-3 inline-block font-medium">
+        Continue Shopping →
+      </Link>
     </div>
+  ) : (
+
+    <div className="grid lg:grid-cols-3 gap-12">
+
+      {/* LEFT SECTION */}
+      <div className="lg:col-span-2 space-y-8">
+
+        {/* HEADER */}
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Cart Items
+          </h2>
+          <p className="text-sm text-gray-600">
+            Manage your selected products below
+          </p>
+        </div>
+
+        {/* COLUMN HEADERS */}
+        <div className="hidden md:grid grid-cols-4 text-sm font-medium text-gray-700 border-b pb-3">
+          <span>Product</span>
+          <span>Price</span>
+          <span>Quantity</span>
+          <span className="text-right">Total</span>
+        </div>
+
+        {/* ITEMS */}
+        <div className="space-y-4">
+
+          {cart.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white border rounded-3xl p-5 grid md:grid-cols-4 gap-6 items-center"
+            >
+
+              {/* PRODUCT */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={item.image}
+                  className="w-16 h-16 rounded-2xl object-cover"
+                />
+                <div>
+                  <h3 className="text-gray-900 font-medium">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-gray-700">
+                    Product selected
+                  </p>
+                </div>
+              </div>
+
+              {/* PRICE */}
+              <div>
+                <p className="text-gray-900 font-semibold">
+                  {item.price}
+                </p>
+                <p className="text-xs text-gray-600">
+                  unit price
+                </p>
+              </div>
+
+              {/* QUANTITY */}
+              <div>
+                <div className="flex items-center bg-gray-100 rounded-full w-fit overflow-hidden">
+
+                  <button
+                    onClick={() => {
+                      updateQuantity(item.id, Math.max(1, item.quantity - 1));
+                      toast.info("Quantity decreased");
+                    }}
+                    className="w-10 h-10 text-gray-900"
+                  >
+                    −
+                  </button>
+
+                  <span className="w-10 text-center text-gray-900 font-medium">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => {
+                      updateQuantity(item.id, item.quantity + 1);
+                      toast.info("Quantity increased");
+                    }}
+                    className="w-10 h-10 text-gray-900"
+                  >
+                    +
+                  </button>
+
+                </div>
+              </div>
+
+              {/* TOTAL + DELETE */}
+              <div className="flex justify-between md:justify-end items-center">
+
+                <div className="text-right">
+                  <p className="text-gray-900 font-semibold">
+                    {(parsePrice(item.price) * item.quantity).toFixed(2)}
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    total
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => {
+                    removeFromCart(item.id);
+                    toast.error("Item deleted");
+                  }}
+                  className="ml-4 text-gray-600 hover:text-red-500"
+                >
+                  🗑
+                </button>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+        {/* COUPON SECTION */}
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">
+            Coupon Code
+          </h2>
+          <p className="text-sm text-gray-600 mb-4">
+            Apply discount if you have one
+          </p>
+
+          <div className="bg-white border rounded-3xl p-5 flex flex-col md:flex-row gap-4">
+
+            <input
+              placeholder="Enter coupon code"
+              className="flex-1 border rounded-2xl px-4 py-3 text-gray-900 outline-none"
+            />
+
+            <button className="px-6 py-3 bg-black text-white rounded-2xl hover:bg-[#C5A059]">
+              Apply
+            </button>
+
+            <Link
+              href="/shop"
+              className="px-6 py-3 border rounded-2xl text-center text-gray-900"
+            >
+              Update
+            </Link>
+
+          </div>
+        </div>
+
+      </div>
+
+      {/* RIGHT SUMMARY */}
+      <div className="sticky top-10 space-y-4">
+
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Order Summary
+          </h2>
+          <p className="text-sm text-gray-600">
+            Final breakdown of your cart
+          </p>
+        </div>
+
+        <div className="bg-white border rounded-3xl p-8 space-y-4">
+
+          <div className="flex justify-between text-gray-900">
+            <span>Subtotal</span>
+            <span>{subtotal.toFixed(2)}</span>
+          </div>
+
+          <div className="flex justify-between text-gray-900">
+            <span>Shipping</span>
+            <span className="text-green-600">Free</span>
+          </div>
+
+          <div className="border-t pt-4 flex justify-between text-lg font-semibold">
+            <span className="text-gray-900">Total</span>
+            <span className="text-[#C5A059]">
+              {subtotal.toFixed(2)}
+            </span>
+          </div>
+
+          <Link href="/checkout">
+            <button className="w-full mt-4 py-3 rounded-2xl bg-[#C5A059]  border-gray-900 text-white hover:text-white transition cursor-pointer">
+              Proceed to Checkout
+            </button>
+          </Link>
+
+<Link
+  href="/shop"
+  className="block text-center text-sm text-gray-700 hover:text-black py-4"
+>
+  Continue Shopping →
+</Link>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  )}
+
+</section>
+  </div>
   );
 }

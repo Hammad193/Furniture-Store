@@ -5,91 +5,82 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import Link from 'next/link';
 import "swiper/css";
 import "swiper/css/navigation";
-import { toast } from 'react-hot-toast';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 import { useCart } from "../context/CartContext";
 import productsData from "../data/furniture-website-data.json";
 
-// Professional Custom Toast Function
-const showCustomToast = (title, message, isSuccess = true) => {
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? 'animate-enter' : 'animate-leave'
-      } max-w-sm w-full bg-white shadow-2xl rounded-2xl pointer-events-auto flex ring-1 ring-black ring-opacity-5 overflow-hidden border border-gray-100`}
-    >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <div className={`h-10 w-10 rounded-full flex items-center justify-center text-xl ${isSuccess ? 'bg-green-100' : 'bg-red-100'}`}>
-              {isSuccess ? '✅' : '🛒'}
-            </div>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-sm font-bold text-gray-900">{title}</p>
-            <p className="mt-1 text-sm text-gray-500">{message}</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex border-l border-gray-100">
-        <button
-          onClick={() => toast.dismiss(t.id)}
-          className="w-full border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-bold text-[#C5A059] hover:bg-gray-50 focus:outline-none"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  ), {
-    duration: 3000,
-  });
-};
-
 export default function BestSellers() {
   const { addToCart } = useCart();
-
+  
   const handleAddToCart = (product) => {
     addToCart(product);
-    showCustomToast("Added to Cart", `${product.name} has been added successfully.`);
+    // React Toastify success notification
+    toast.success(`${product.name} has been added successfully.`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-serif text-gray-900 mb-2">Best Sellers</h2>
-        <div className="w-24 h-1 bg-[#C5A059] mx-auto"></div>
-      </div>
+    <section className="py-24 bg-[#F8F5F0]">
+ <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ marginTop: '60px', zIndex: 9999 }} 
+      />
 
       <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="text-[#C5A059] font-medium tracking-[0.2em] uppercase text-sm">Our Selection</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mt-3 mb-6">Best Sellers</h2>
+          <div className="w-20 h-1 bg-[#C5A059] mx-auto rounded-full"></div>
+        </div>
+
         <Swiper
           modules={[Autoplay, Navigation]}
           spaceBetween={30}
           slidesPerView={1}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          navigation={true} // Left/Right arrows
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          className="pb-10"
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          navigation={true}
+          breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+          className="pb-12"
         >
           {productsData.map((product, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all group">
-                <div className="relative overflow-hidden rounded-xl mb-4 h-56">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <Link href={`/product/${product.id}`}><button className="absolute top-3 right-3 p-2 bg-white cursor-pointer rounded-full shadow-lg text-gray-600 hover:text-[#C5A059]">
-                    <Eye size={18} />
-                  </button></Link>
+              <div className="bg-white rounded-[24px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 group">
+                {/* Image Container */}
+                <div className="relative overflow-hidden rounded-[18px] mb-6 h-72">
+                  <Link href={`/product/${product.id}`}>
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </Link>
+                  <Link href={`/product/${product.id}`} className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-gray-600 hover:text-[#C5A059] transition-colors">
+                    <Eye size={20} />
+                  </Link>
                 </div>
                 
-                <div className="text-center">
-                  <h3 className="font-bold text-lg text-gray-800 truncate px-2">{product.name}</h3>
-                  <p className="text-[#C5A059] font-bold text-xl my-2">{product.price}</p>
+                {/* Content */}
+                <div className="px-2 text-center pb-2">
+                  <Link href={`/product/${product.id}`}>
+                    <h3 className="font-serif text-xl text-gray-900 mb-2 truncate">{product.name}</h3>
+                  </Link>
+                  <p className="text-[#C5A059] font-bold text-lg mb-6">{product.price}</p>
                   
                   <button 
                     onClick={() => handleAddToCart(product)}
-                    className="w-full py-3 mt-2 border border-gray-900 text-black rounded-lg cursor-pointer hover:bg-[#C5A059] hover:text-white hover:border-none transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-transparent border border-gray-900 text-gray-900 rounded-[16px] font-bold hover:bg-[#C5A059] hover:border-none hover:text-white transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wider text-sm cursor-pointer"
                   >
                     <ShoppingCart size={18} /> Add to Cart
                   </button>

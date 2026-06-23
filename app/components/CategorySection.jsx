@@ -11,51 +11,51 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="py-20 bg-white px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 bg-[#F8F5F0]">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">Shop By Category</h2>
-          <div className="w-24 h-1 bg-[#C5A059] mx-auto"></div>
+          <span className="text-[#C5A059] font-medium tracking-[0.2em] uppercase text-sm">Discover</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mt-3 mb-6">Shop By Category</h2>
+          <div className="w-20 h-1 bg-[#C5A059] mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat, index) => (
-            <div key={index} className="group relative overflow-hidden rounded-2xl shadow-md bg-white">
-              <div className="h-80 w-full overflow-hidden">
+            <motion.div 
+              whileHover={{ y: -10 }}
+              key={index} 
+              className="group relative h-[450px] rounded-[30px] overflow-hidden shadow-lg"
+            >
+              {/* Image with Dark Gradient Overlay */}
+              <div className="absolute inset-0">
                 <img 
                   src={cat.image} 
                   alt={cat.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               </div>
 
-              <div className="absolute inset-0 flex flex-col justify-center items-center bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
-                <h3 className="text-white text-2xl font-bold mb-6 shadow-text">{cat.name}</h3>
+              {/* Content Positioned at Bottom */}
+              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col items-center text-center">
+                <h3 className="text-white text-2xl font-serif mb-6 transform transition-transform duration-300 group-hover:-translate-y-2">
+                  {cat.name}
+                </h3>
                 
-                {/* View Collection Button: Mobile par hamesha dikhega */}
-                <div className="opacity-100 transition-opacity duration-300">
-                  <Link href="/collections">
-                    <button className="px-6 py-2 border-2 border-white text-white font-bold rounded-full cursor-pointer hover:bg-white hover:text-black transition-all">
-                      View Collection
-                    </button>
+                {/* Buttons Container */}
+                <div className="flex flex-col gap-3 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Link href="/category" className="w-full py-3 bg-white text-gray-900 font-bold rounded-full hover:bg-[#C5A059] hover:text-white transition-all duration-300 text-sm uppercase tracking-wider">
+                    View Category
+                  </Link>
+                  <Link href="/404" className="w-full py-3 border border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 text-sm uppercase tracking-wider">
+                    Quick View
                   </Link>
                 </div>
-
-                {/* Quick View Button: Sirf Desktop (lg) par hover par dikhega */}
-                <div className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
-                  <Link href="/404"><button className="px-6 py-2 bg-[#C5A059] text-white font-bold rounded-full cursor-pointer hover:bg-[#a88647] transition-all">
-                    Quick View
-                  </button></Link>
-                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-      
-      <style jsx>{`
-        .shadow-text { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-      `}</style>
     </section>
   );
 }

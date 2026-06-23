@@ -1,48 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../context/CartContext"; 
-import { toast } from 'react-hot-toast';
-
-// Professional Custom Toast Function
-const showCustomToast = (title, message, isSuccess = true) => {
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? 'animate-enter' : 'animate-leave'
-      } max-w-sm w-full bg-white shadow-2xl rounded-2xl pointer-events-auto flex ring-1 ring-black ring-opacity-5 overflow-hidden border border-gray-100`}
-    >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <div className={`h-10 w-10 rounded-full flex items-center justify-center text-xl ${isSuccess ? 'bg-green-100' : 'bg-red-100'}`}>
-              {isSuccess ? '✅' : '⚠️'}
-            </div>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-sm font-bold text-gray-900">{title}</p>
-            <p className="mt-1 text-sm text-gray-500">{message}</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex border-l border-gray-100">
-        <button
-          onClick={() => toast.dismiss(t.id)}
-          className="w-full border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-bold text-[#C5A059] hover:bg-gray-50 focus:outline-none"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  ), {duration:3000,
-    
-  });
-};
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CheckoutPage() {
-  const { cart, clearCart } = useCart();
+  const { cart, clearCart, buyNowItem } = useCart();
   const router = useRouter();
+
+  const [itemsToCheckout, setItemsToCheckout] = useState([]);
+
+  // Sync logic: Cart ko priority di gayi hai, agar cart empty hai toh buyNowItem show hoga
+  useEffect(() => {
+    if (cart && cart.length > 0) {
+      setItemsToCheckout(cart);
+    } else if (buyNowItem) {
+      setItemsToCheckout([buyNowItem]);
+    } else {
+      setItemsToCheckout([]);
+    }
+  }, [cart, buyNowItem]);
 
   const [formData, setFormData] = useState({
     firstName: "", lastName: "", email: "", phone: "", address: "", city: "", postalCode: ""
@@ -57,32 +36,41 @@ export default function CheckoutPage() {
     return parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0;
   };
 
-  const subtotal = cart.reduce((acc, item) => acc + parsePrice(item.price) * (item.quantity || 1), 0);
+  const subtotal = itemsToCheckout.reduce((acc, item) => acc + parsePrice(item.price) * (item.quantity || 1), 0);
   const shipping = subtotal > 0 ? 50 : 0;
   const total = subtotal + shipping;
 
   const handlePlaceOrder = () => {
-    // Validation Check
-    if (cart.length === 0) {
-      // Yahan duration: 3000 add kiya gaya hai
-      showCustomToast("Error", "Your cart is empty!", false); 
+    if (itemsToCheckout.length === 0) {
+      toast.error("Your order is empty!"); 
       return;
     }
     
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.postalCode) {
-      // Yahan duration: 3000 add kiya gaya hai
-      showCustomToast("Required", "Please fill in all address details!", false);
+      toast.warn("Please fill in all address details!");
       return;
     }
 
     clearCart();
-    // Yahan duration: 3000 add kiya gaya hai
-    showCustomToast("Success", "Order placed successfully!");
+    toast.success("Order placed successfully!");
     router.push("/placeorder");
   };
 
   return (
     <div className="min-h-screen bg-[#F8F5F0]">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ marginTop: '60px', zIndex: 9999 }} 
+      />
+      
       <section className="relative py-40 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2070&auto=format&fit=crop" alt="Checkout Background" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[#111111]/80" />
@@ -118,7 +106,7 @@ export default function CheckoutPage() {
               <h2 className="text-3xl font-serif mt-4 mb-8">Your Order</h2>
 
               <div className="space-y-6">
-                {cart.map((item) => (
+                {itemsToCheckout.map((item) => (
                   <div key={item.id} className="flex gap-4 items-center">
                     <img src={item.image} alt={item.name} className="w-20 h-20 rounded-2xl object-cover" />
                     <div>

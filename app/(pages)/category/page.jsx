@@ -19,7 +19,7 @@ export default function CollectionsPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-50"
         />
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-3xl md:text-6xl text-gray-900 font-serif mb-4">Collections</h1>
+          <h1 className="text-3xl md:text-6xl text-gray-900 font-serif mb-4">Categories of Furniture</h1>
           <p className="text-gray-800 text-sm md:text-lg">Crafting luxury and comfort for your sanctuary</p>
         </div>
       </div>

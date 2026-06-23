@@ -1,0 +1,98 @@
+[
+  {
+    "id": 101,
+    "name": "Velvet Royal Sofa",
+    "price": "450 BD",
+    "category": "Sofa",
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=600",
+    "description": "Premium velvet finish sofa with gold-plated legs for a luxurious feel."
+  },
+  {
+    "id": 102,
+    "name": "Oak Wood Dining Table",
+    "price": "600 BD",
+    "category": "Dining",
+    "image": "https://images.unsplash.com/photo-1577140917148-356323696515?q=80&w=600",
+    "description": "Solid oak wood table that seats six, perfect for family dinners."
+  },
+  {
+    "id": 103,
+    "name": "Modern Leather Chair",
+    "price": "120 BD",
+    "category": "Chair",
+    "image": "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=600",
+    "description": "Ergonomic leather chair designed for office or study spaces."
+  },
+  {
+    "id": 104,
+    "name": "Glass Top Coffee Table",
+    "price": "95 BD",
+    "category": "Table",
+    "image": "https://images.unsplash.com/photo-1533090481704-547c05d33e21?q=80&w=600",
+    "description": "Minimalist coffee table with a tempered glass top and metal frame."
+  },
+  {
+    "id": 105,
+    "name": "Luxury King Bed",
+    "price": "850 BD",
+    "category": "Bed",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=600",
+    "description": "Hand-crafted king size bed with an upholstered headboard."
+  },
+  {
+    "id": 106,
+    "name": "Nightstand Drawer",
+    "price": "75 BD",
+    "category": "Storage",
+    "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600",
+    "description": "Compact two-drawer nightstand in a dark walnut finish."
+  },
+  {
+    "id": 107,
+    "name": "Scandinavian Bookshelf",
+    "price": "210 BD",
+    "category": "Storage",
+    "image": "https://images.unsplash.com/photo-1594620302919-476788876939?q=80&w=600",
+    "description": "Open-style bookshelf with clean lines and sturdy construction."
+  },
+  {
+    "id": 108,
+    "name": "Industrial Bar Stool",
+    "price": "85 BD",
+    "category": "Chair",
+    "image": "https://images.unsplash.com/photo-1507808973436-a4c7b78798bc?q=80&w=600",
+    "description": "Vintage industrial look with a metal base and wooden seat."
+  },
+  {
+    "id": 109,
+    "name": "Floor Lamp Gold",
+    "price": "140 BD",
+    "category": "Lighting",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600",
+    "description": "Elegant floor lamp that adds warm ambiance to any corner."
+  },
+  {
+    "id": 110,
+    "name": "Minimalist Wall Mirror",
+    "price": "60 BD",
+    "category": "Decor",
+    "image": "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=600",
+    "description": "Large circular mirror with a slim metallic frame."
+  },
+  {
+    "id": 111,
+    "name": "Office Desk Executive",
+    "price": "350 BD",
+    "category": "Table",
+    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=600",
+    "description": "Spacious executive desk with integrated cable management."
+  },
+  {
+    "id": 112,
+    "name": "Outdoor Lounge Chair",
+    "price": "190 BD",
+    "category": "Outdoor",
+    "image": "https://images.unsplash.com/photo-1567593685844-2f2982823610?q=80&w=600",
+    "description": "Weather-resistant lounge chair for your patio or balcony."
+  }
+]
