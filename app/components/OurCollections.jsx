@@ -1,9 +1,9 @@
+"use client";
 import Link from "next/link";
 
-
-
 export default function ProductSection() {
-  // Aap yahan list mein kitne bhi products add kar sakte hain
+  const WHATSAPP_NUMBER = "97312345678"; // Yahan apna WhatsApp number likhein (Country code ke sath, bina + ke)
+
   const AllProducts = [
     { title: "Luxury Bed A", price: "250 BD", img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=600" },
     { title: "Royal Master Bed", price: "400 BD", img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=600" },
@@ -23,23 +23,28 @@ export default function ProductSection() {
           <div className="w-24 h-1 bg-[#C5A059] mx-auto"></div>
         </div>
 
-        {/* Responsive Grid: Mobile 1 column, Tablet 2, Desktop 4 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {AllProducts.map((product, idx) => (
-            <div key={idx} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-gray-900 transition-all group">
+            <div key={idx} className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-gray-900 transition-all group shadow-sm">
               <div className="h-64 overflow-hidden">
-                <img 
+                <Link href="/404"><img 
                   src={product.img} 
                   alt={product.title} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                />
+                /></Link>
               </div>
               <div className="p-5 text-center">
-                <h3 className="text-lg font-medium mb-1">{product.title}</h3>
+                <Link href="/404"><h3 className="text-lg font-medium mb-1">{product.title}</h3></Link>
                 <p className="text-[#C5A059] font-bold mb-4">{product.price}</p>
-                <button className="w-full border border-gray-900 text-gray-900 py-2 rounded-lg cursor-pointer hover:bg-gray-900 hover:text-white transition">
+                
+                {/* Updated Button: Link use kiya gaya hai */}
+                <Link 
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20which%20is%20priced%20at%20${product.price}`}
+                  target="_blank"
+                  className="block w-full border border-gray-900 text-gray-900 py-2 rounded-lg hover:bg-[#C5A059] hover:border-none hover:text-white transition text-sm font-semibold"
+                >
                   Order on WhatsApp
-                </button>
+                </Link>
               </div>
             </div>
           ))}

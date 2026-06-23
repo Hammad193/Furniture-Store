@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 const slides = [
   { 
@@ -62,9 +63,9 @@ export default function HeroBanner() {
             >
               {slides[index].subtitle}
             </motion.p>
-            <button className="mt-8 px-8 py-3 border-2 border-white cursor-pointer hover:bg-blue-500 hover:border-blue-500 transition-all duration-300 font-bold uppercase tracking-wider">
+            <Link href ="/collections"><button className="mt-8 px-8 py-3 border-2 border-white cursor-pointer hover:bg-[#C5A059] hover:border-[#C5A059] transition-all duration-300 font-bold uppercase tracking-wider">
               Explore Collections
-            </button>
+            </button></Link>
           </div>
         </motion.div>
       </AnimatePresence>

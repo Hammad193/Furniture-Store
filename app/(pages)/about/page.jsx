@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+
+
 export default function AboutPage() {
   return (
     <>
@@ -140,26 +144,26 @@ export default function AboutPage() {
 
 {/* 5. Call To Action */}
 
-<section className="py-24 bg-[#111111]">
+<section className="py-24 bg-white">
   <div className="max-w-4xl mx-auto px-6 text-center">
     <span className="text-[#C5A059] uppercase tracking-[4px] text-sm">
       Discover Luxury
     </span>
 
 
-<h2 className="text-4xl md:text-5xl font-serif text-white mt-4 mb-6">
+<h2 className="text-4xl md:text-5xl font-serif text-gray-900 mt-4 mb-6">
   Transform Your Home Today
 </h2>
 
-<p className="text-gray-300 text-lg leading-relaxed mb-10">
+<p className="text-gray-600 text-lg leading-relaxed mb-10">
   Explore our carefully curated collection of luxury furniture and
   discover pieces that bring elegance, comfort, and sophistication
   to every room.
 </p>
 
-<button className="bg-[#C5A059] text-white px-10 py-4 rounded-full font-medium hover:opacity-90 transition">
+<Link href ="/collections"><button className="bg-[#C5A059] text-white px-10 py-4 rounded-full font-medium cursor-pointer hover:bg-gray-900 hover:opacity-90 transition">
   Explore Collection
-</button>
+</button></Link>
 
 
   </div>

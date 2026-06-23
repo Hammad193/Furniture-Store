@@ -10,7 +10,7 @@ return (
 <div className="relative h-[400px] flex items-center justify-center overflow-hidden bg-gray-100">
   {/* New Background Image: Premium Furniture Showroom */}
   <img 
-    src="https://babafurniture.com.pk/wp-content/uploads/2025/08/9906AA9E-FA4A-4C72-986C-DB8C55BC041F-600x600.png"
+    src="https://kukahomeusa.com/wp-content/uploads/2023/10/KF.B1051-4.jpg"
     alt="Luxury Furniture Collection"
     className="absolute inset-0 w-full h-full object-cover opacity-60"
   />
@@ -143,11 +143,11 @@ return (
         {/* Social Buttons */}
         <div className="grid grid-cols-2 gap-4">
 
-          <button className="text-gray-900 border border-gray-200 py-4 rounded-2xl hover:bg-gray-900 hover:text-white transition font-medium cursor-pointer">
+          <button className="text-gray-900 border border-gray-200 py-4 rounded-2xl hover:bg-[#C5A059] hover:text-white transition font-medium cursor-pointer">
             Google
           </button>
 
-          <button className="text-gray-900 border border-gray-200 py-4 rounded-2xl hover:bg-gray-900 hover:text-white transition font-medium cursor-pointer">
+          <button className="text-gray-900 border border-gray-200 py-4 rounded-2xl hover:bg-[#C5A059] hover:text-white transition font-medium cursor-pointer">
             Facebook
           </button>
 

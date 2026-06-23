@@ -21,7 +21,6 @@ export default function CategorySection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((cat, index) => (
             <div key={index} className="group relative overflow-hidden rounded-2xl shadow-md bg-white">
-              {/* Image */}
               <div className="h-80 w-full overflow-hidden">
                 <img 
                   src={cat.image} 
@@ -30,21 +29,23 @@ export default function CategorySection() {
                 />
               </div>
 
-              {/* Content Overlay */}
               <div className="absolute inset-0 flex flex-col justify-center items-center bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
                 <h3 className="text-white text-2xl font-bold mb-6 shadow-text">{cat.name}</h3>
                 
-                {/* Buttons - Show only on hover for a cleaner look */}
-                <div className="flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  <Link href ="/collections"><button 
-                    onClick={() => window.location.href = cat.link}
-                    className="px-6 py-2 bg-white text-gray-900 font-bold rounded-full cursor-pointer hover:bg-blue-500 hover:text-white transition-all"
-                  >
-                    View Collection
-                  </button></Link>
-                  <button className="px-6 py-2 bg-[#C5A059] text-white font-bold rounded-full cursor-pointer hover:bg-[#a88647] transition-all">
+                {/* View Collection Button: Mobile par hamesha dikhega */}
+                <div className="opacity-100 transition-opacity duration-300">
+                  <Link href="/collections">
+                    <button className="px-6 py-2 border-2 border-white text-white font-bold rounded-full cursor-pointer hover:bg-white hover:text-black transition-all">
+                      View Collection
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Quick View Button: Sirf Desktop (lg) par hover par dikhega */}
+                <div className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
+                  <Link href="/404"><button className="px-6 py-2 bg-[#C5A059] text-white font-bold rounded-full cursor-pointer hover:bg-[#a88647] transition-all">
                     Quick View
-                  </button>
+                  </button></Link>
                 </div>
               </div>
             </div>
@@ -52,7 +53,6 @@ export default function CategorySection() {
         </div>
       </div>
       
-      {/* CSS for better shadow on text */}
       <style jsx>{`
         .shadow-text { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
       `}</style>

@@ -4,7 +4,7 @@ import BestSellers from './components/BestSellers';
 import FAQ from './components/clinetdata/FAQ';
 import Testimonial from './components/clinetdata/Testimonials';
 import Facilities from './components/Facilities';
-import AllProducts from './components/AllProducts';
+import AllProducts from './components/OurCollections';
 
 export default function Home() {
   return (

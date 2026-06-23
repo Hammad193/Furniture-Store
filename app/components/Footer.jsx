@@ -8,7 +8,7 @@ export default function Footer() {
 
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-white mb-4 hover:text-[#C5A059] cursor-pointer">
               Furniture Store
             </h3>
 
@@ -26,11 +26,11 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-3">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/shop">Shop</Link></li>
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
-              <li><Link href="/faq">FAQ</Link></li>
+              <li><Link href="/" className="hover:text-[#C5A059]">Home</Link></li>
+              <li><Link href="/shop" className="hover:text-[#C5A059]">Product</Link></li>
+              <li><Link href="/collections" className="hover:text-[#C5A059]">Collections</Link></li>
+              <li><Link href="/about" className="hover:text-[#C5A059]">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-[#C5A059]">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -41,11 +41,11 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-3">
-              <li><Link href="/living-room">Living Room</Link></li>
-              <li><Link href="/bedroom">Bedroom</Link></li>
-              <li><Link href="/dining-room">Dining Room</Link></li>
-              <li><Link href="/office-furniture">Office Furniture</Link></li>
-              <li><Link href="/outdoor">Outdoor Furniture</Link></li>
+              <li><Link href="/404" className="hover:text-[#C5A059]">Living Room</Link></li>
+              <li><Link href="/404" className="hover:text-[#C5A059]">Bedroom</Link></li>
+              <li><Link href="/404" className="hover:text-[#C5A059]">Dining Room</Link></li>
+              <li><Link href="/404" className="hover:text-[#C5A059]">Office Furniture</Link></li>
+              <li><Link href="/404" className="hover:text-[#C5A059]">Outdoor Furniture</Link></li>
             </ul>
           </div>
 
@@ -62,9 +62,9 @@ export default function Footer() {
             </ul>
 
             <div className="flex gap-4 mt-6">
-              <a href="#">Facebook</a>
-              <a href="#">Instagram</a>
-              <a href="#">YouTube</a>
+              <a href="/404" className="cursor-pointer hover:text-[#C5A059]">Facebook</a>
+              <a href="/404" className="cursor-pointer hover:text-[#C5A059]">Instagram</a>
+              <a href="/404" className="cursor-pointer hover:text-[#C5A059]">YouTube</a>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export default function Footer() {
                 className="px-4 py-3 w-full md:w-80 rounded-l-lg text-white outline-none"
               />
 
-              <button className="bg-white text-black px-6 rounded-r-lg font-medium cursor-pointer">
+              <button className="bg-white text-black px-6 hover:bg-[#C5A059] hover:text-white rounded-r-lg font-medium cursor-pointer">
                 Subscribe
               </button>
             </div>
@@ -101,19 +101,19 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>
-            © 2026 Furniture Store. All Rights Reserved.
+            © 2026 Furniture Store. All Rights Reserved.Created by Webo Creators.
           </p>
 
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="/privacy-policy">
+            <Link href="/404" className="cursor-pointer hover:text-[#C5A059]">
               Privacy Policy
             </Link>
 
-            <Link href="/terms-and-conditions">
+            <Link href="/404" className="cursor-pointer hover:text-[#C5A059]">
               Terms & Conditions
             </Link>
 
-            <Link href="/refund-policy">
+            <Link href="/404" className="cursor-pointer hover:text-[#C5A059]">
               Refund Policy
             </Link>
           </div>
