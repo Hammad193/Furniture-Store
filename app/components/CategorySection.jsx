@@ -42,12 +42,16 @@ export default function CategorySection() {
                   {cat.name}
                 </h3>
                 
-                {/* Buttons Container */}
-                <div className="flex flex-col gap-3 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Link href="/category" className="w-full py-3 bg-white text-gray-900 font-bold rounded-full hover:bg-[#C5A059] hover:text-white transition-all duration-300 text-sm uppercase tracking-wider">
+                {/* LOGIC: 
+                   opacity-100 (Mobile par hamesha dikhega)
+                   md:opacity-0 (Desktop par shuru mein hidden)
+                   md:group-hover:opacity-100 (Desktop par hover karne par show hoga)
+                */}
+                <div className="flex flex-col gap-3 w-full opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                  <Link href="/category" className="w-full block text-center py-3 bg-white text-gray-900 font-bold rounded-full hover:bg-[#C5A059] hover:text-white transition-all duration-300 text-sm uppercase tracking-wider">
                     View Category
                   </Link>
-                  <Link href="/404" className="w-full py-3 border border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 text-sm uppercase tracking-wider">
+                  <Link href="/404" className="w-full block text-center py-3 border border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 text-sm uppercase tracking-wider">
                     Quick View
                   </Link>
                 </div>

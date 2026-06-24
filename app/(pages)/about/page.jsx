@@ -51,13 +51,13 @@ export default function AboutPage() {
           
           {/* Stats */}
           <div className="grid grid-cols-2 gap-8 pt-8">
-            <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
+            <div className="bg-transparent border border-gray-900 p-6 rounded-xl">
               <h4 className="text-4xl font-bold text-[#C5A059] mb-2">500+</h4>
-              <p className="text-sm text-white uppercase tracking-widest">Happy Customers</p>
+              <p className="text-sm text-gray-900 uppercase tracking-widest">Happy Customers</p>
             </div>
-            <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
+            <div className="bg-transparent border border-gray-900 p-6 rounded-xl">
               <h4 className="text-4xl font-bold text-[#C5A059] mb-2">5 Years</h4>
-              <p className="text-sm text-white uppercase tracking-widest">Warranty</p>
+              <p className="text-sm text-gray-900 uppercase tracking-widest">Warranty</p>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
   to every room.
 </p>
 
-<Link href ="/collections"><button className="bg-[#C5A059] text-white px-10 py-4 rounded-full font-medium cursor-pointer hover:bg-gray-900 hover:opacity-90 transition">
+<Link href ="/collections"><button className="bg-transparent border border-gray-900 text-gray-900 px-10 py-4 rounded-full font-medium cursor-pointer hover:bg-[#C5A059] hover:text-white hover:border hover:border-white hover:opacity-90 transition">
   Explore Collection
 </button></Link>
 

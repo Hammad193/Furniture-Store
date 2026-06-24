@@ -184,7 +184,7 @@ export default function ShopPage() {
                         addToCart(p);
                         toast.success(`${p.name} added to cart!`);
                       }}
-                      className="flex-1 bg-gray-900 text-white py-3 rounded-2xl font-medium hover:bg-[#C5A059] transition-all duration-300 cursor-pointer"
+                      className="flex-1 bg-transparent border border-gray-300 text-gray-900 py-3 rounded-2xl font-medium hover:bg-[#C5A059] hover:text-white transition-all duration-300 cursor-pointer"
                     >
                       Add to Cart
                     </button>

@@ -109,7 +109,7 @@ export default function CartPage() {
                       updateQuantity(item.id, Math.max(1, item.quantity - 1));
                       toast.info("Quantity decreased");
                     }}
-                    className="w-10 h-10 text-gray-900"
+                    className="w-10 h-10 text-gray-900 cursor-pointer"
                   >
                     −
                   </button>
@@ -123,7 +123,7 @@ export default function CartPage() {
                       updateQuantity(item.id, item.quantity + 1);
                       toast.info("Quantity increased");
                     }}
-                    className="w-10 h-10 text-gray-900"
+                    className="w-10 h-10 text-gray-900 cursor-pointer" 
                   >
                     +
                   </button>
@@ -148,7 +148,7 @@ export default function CartPage() {
                     removeFromCart(item.id);
                     toast.error("Item deleted");
                   }}
-                  className="ml-4 text-gray-600 hover:text-red-500"
+                  className="ml-4 text-gray-600 hover:text-red-500 cursor-pointer"
                 >
                   🗑
                 </button>
@@ -176,13 +176,13 @@ export default function CartPage() {
               className="flex-1 border rounded-2xl px-4 py-3 text-gray-900 outline-none"
             />
 
-            <button className="px-6 py-3 bg-black text-white rounded-2xl hover:bg-[#C5A059]">
+            <button className="px-6 py-3 rounded-2xl bg-transparent border border-gray-900 hover:bg-[#C5A059] hover:border-white text-black hover:text-white cursor-pointer">
               Apply
             </button>
 
             <Link
               href="/shop"
-              className="px-6 py-3 border rounded-2xl text-center text-gray-900"
+              className="px-6 py-3 rounded-2xl text-center bg-transparent border border-gray-900 hover:bg-[#C5A059] hover:border-white text-black hover:text-white cursor-pointer"
             >
               Update
             </Link>
@@ -224,7 +224,7 @@ export default function CartPage() {
           </div>
 
           <Link href="/checkout">
-            <button className="w-full mt-4 py-3 rounded-2xl bg-[#C5A059]  border-gray-900 text-white hover:text-white transition cursor-pointer">
+            <button className="w-full mt-4 py-3 rounded-2xl bg-transparent border border-gray-900 hover:bg-[#C5A059] hover:border-white text-black hover:text-white transition cursor-pointer">
               Proceed to Checkout
             </button>
           </Link>

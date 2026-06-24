@@ -24,6 +24,7 @@ export default function ProductDetailPage() {
   const [mainImage, setMainImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const { directPurchase, setDirectPurchase } = useCart();
+  const [activeTab, setActiveTab] = useState("description");
 
   // Reviews State
   const [reviews, setReviews] = useState([]);
@@ -222,38 +223,32 @@ export default function ProductDetailPage() {
 
         {/* Description & Reviews Section */}
         <div className="mt-28">
-          <div className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-r from-[#C5A059] to-[#E3C98B] flex items-center justify-center text-white">
-                ✨
-              </div>
-              <h2 className="text-3xl font-bold text-gray-900">
-                Product Description
-              </h2>
-            </div>
-            <p className="text-gray-600 leading-8 text-lg">
-              {product.description || "Premium quality furniture crafted for comfort and style."}
-            </p>
-          </div>
+      {/* Tabs Header */}
+      <div className="flex gap-8 border-b border-gray-200 mb-8">
+        <button
+          onClick={() => setActiveTab("description")}
+          className={`pb-4 text-lg font-medium cursor-pointer transition-colors ${activeTab === "description" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-400"}`}
+        >
+          Description
+        </button>
+        <button
+          onClick={() => setActiveTab("reviews")}
+          className={`pb-4 text-lg font-medium cursor-pointer transition-colors ${activeTab === "reviews" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-400"}`}
+        >
+          Reviews ({reviews.length})
+        </button>
+      </div>
 
-          <div className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] mb-12">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900">
-                  Share Your Experience
-                </h2>
-                <p className="text-gray-500 mt-2">
-                  Your feedback helps other customers.
-                </p>
-              </div>
-              <div className="inline-flex items-center gap-2 bg-amber-50 px-4 py-2 rounded-full">
-                <span>⭐</span>
-                <span className="font-medium text-sm">
-                  {reviews.length} Reviews
-                </span>
-              </div>
-            </div>
-
+      {/* Tab Content */}
+      {activeTab === "description" ? (
+        <div className="text-gray-600 leading-8 text-lg">
+          {product.description || "Premium quality furniture crafted for comfort and style."}
+        </div>
+      ) : (
+        <div className="space-y-12">
+          {/* Form */}
+          <div className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.05)]">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Experience</h2>
             <form onSubmit={handleReviewSubmit} className="space-y-5">
               <input
                 type="email"
@@ -280,40 +275,29 @@ export default function ProductDetailPage() {
             </form>
           </div>
 
+          {/* List */}
           <div>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">Customer Reviews</h2>
-              <span className="text-sm bg-gray-100 px-4 py-2 rounded-full font-medium w-fit">
-                {reviews.length} Total Reviews
-              </span>
-            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Customer Reviews</h2>
             {reviews.length === 0 ? (
               <div className="bg-gray-50 border border-dashed border-gray-200 rounded-[28px] p-12 text-center">
                 <div className="text-5xl mb-4">💬</div>
                 <h3 className="text-xl font-semibold text-gray-800">No Reviews Yet</h3>
-                <p className="text-gray-500 mt-2">Be the first person to share your experience.</p>
               </div>
             ) : (
               <div className="grid gap-5">
                 {reviews.map((r) => (
-                  <div key={r.id} className="group bg-white border border-gray-100 rounded-[28px] p-6 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                  <div key={r.id} className="bg-white border border-gray-100 rounded-[28px] p-6 shadow-sm">
                     <div className="flex justify-between items-start gap-4">
                       <div className="flex gap-4">
                         <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#C5A059] to-[#E3C98B] flex items-center justify-center text-white font-bold text-lg shrink-0">
                           {r.email.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <h4 className="font-semibold text-gray-900">{r.email}</h4>
-                            <span className="text-yellow-500">★★★★★</span>
-                          </div>
-                          <p className="text-gray-600 leading-7">{r.comment}</p>
+                          <h4 className="font-semibold text-gray-900">{r.email}</h4>
+                          <p className="text-gray-600 mt-1">{r.comment}</p>
                         </div>
                       </div>
-                      <button
-                        onClick={() => deleteReview(r.id)}
-                        className="text-red-500 hover:bg-red-50 px-4 py-2 rounded-xl transition-all cursor-pointer"
-                      >
+                      <button onClick={() => deleteReview(r.id)} className="text-red-500 cursor-pointer hover:bg-red-50 px-4 py-2 rounded-xl transition-all">
                         Delete
                       </button>
                     </div>
@@ -323,6 +307,8 @@ export default function ProductDetailPage() {
             )}
           </div>
         </div>
+      )}
+    </div>
 
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
